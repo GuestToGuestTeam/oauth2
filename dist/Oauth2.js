@@ -93,9 +93,10 @@ var Oauth2 = function () {
                     password: Oauth2.options.password
                 }
             }).then(function (request) {
+                var response = JSON.parse(request.responseText);
                 // set access_token and refresh_token
-                Oauth2.setAccessToken(request.responseJSON.access_token);
-                Oauth2.setRefreshToken(request.responseJSON.refresh_token);
+                Oauth2.setAccessToken(response.access_token);
+                Oauth2.setRefreshToken(response.refresh_token);
                 return request;
             });
         }
@@ -115,9 +116,10 @@ var Oauth2 = function () {
                     refresh_token: Oauth2.getRefreshToken()
                 }
             }).then(function (request) {
+                var response = JSON.parse(request.responseText);
                 // update access_token and refresh_token
-                Oauth2.setAccessToken(request.responseJSON.access_token);
-                Oauth2.setRefreshToken(request.responseJSON.refresh_token);
+                Oauth2.setAccessToken(response.access_token);
+                Oauth2.setRefreshToken(response.refresh_token);
                 return request;
             });
         }

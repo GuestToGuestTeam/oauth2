@@ -93,9 +93,10 @@ export default class Oauth2 {
             }
         })
         .then((request) => {
+            const response = JSON.parse(request.responseText);
             // set access_token and refresh_token
-            Oauth2.setAccessToken(request.responseJSON.access_token);
-            Oauth2.setRefreshToken(request.responseJSON.refresh_token);
+            Oauth2.setAccessToken(response.access_token);
+            Oauth2.setRefreshToken(response.refresh_token);
             return request;
         });
     }
@@ -115,9 +116,10 @@ export default class Oauth2 {
             }
         })
         .then((request) => {
+            const response = JSON.parse(request.responseText);
             // update access_token and refresh_token
-            Oauth2.setAccessToken(request.responseJSON.access_token);
-            Oauth2.setRefreshToken(request.responseJSON.refresh_token);
+            Oauth2.setAccessToken(response.access_token);
+            Oauth2.setRefreshToken(response.refresh_token);
             return request;
         });
     }
