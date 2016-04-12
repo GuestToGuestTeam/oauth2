@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import Cookies from 'js-cookie';
 
 export default class Oauth2 {

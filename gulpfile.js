@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var eslint = require('gulp-eslint');
 var babel = require('gulp-babel');
 var mocha = require('gulp-mocha');
+require('babel-polyfill');
 require('babel-core/register');
 
 // Lint Task
