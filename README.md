@@ -2,7 +2,7 @@ Oauth2 library for resource owner password credentials
 ======================================================
 
 ## Configure Oauth2
-```
+```javascript
 Oauth2.configure({
     tokenUri: '/oauth/v2/token',
     client_id: 's6BhdRkqt3',
@@ -13,7 +13,7 @@ Oauth2.configure({
 ```
 
 ## Request ressource
-```
+```javascript
 Oauth2.request('/users').then(function (request) {
     console.log(request.responseJSON);
 });
