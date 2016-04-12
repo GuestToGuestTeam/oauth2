@@ -19,6 +19,22 @@ Oauth2.request('/users').then(function (request) {
 });
 ```
 
+```javascript
+Oauth2.request('/users', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: {
+        email: 'john@mail.com',
+        username: 'john',
+        password: '123456'
+    }
+}).then(function (request) {
+    console.log(request.responseJSON);
+});
+```
+
 ## Workflow diagram
 ```
 +----------------+                                                                              +----------------+
