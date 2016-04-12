@@ -32,7 +32,6 @@ export default class Oauth2 {
                         );
                     },
                     function (request) {
-                        sweetAlert('API connection failed', request.responseJSON.error_description, 'error');
                         reject(request);
                     }
                 );
@@ -59,8 +58,6 @@ export default class Oauth2 {
                                 );
                             },
                             function (request) {
-                                console.error(request);
-                                sweetAlert('API connection failed', request.responseJSON.error_description, 'error');
                                 reject(request);
                             }
                         );
