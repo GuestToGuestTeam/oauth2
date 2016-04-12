@@ -145,7 +145,7 @@ var Oauth2 = function () {
                 }
                 request.onreadystatechange = function () {
                     if (request.readyState == 4) {
-                        if (request.responseHeaders['Content-Type'] && request.responseHeaders['Content-Type'] === 'application/json') {
+                        if (request.responseHeaders && request.responseHeaders['Content-Type'] && request.responseHeaders['Content-Type'] === 'application/json') {
                             request.responseJSON = JSON.parse(request.responseText);
                         }
                         if (request.status == 200) {
