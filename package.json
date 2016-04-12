@@ -2,8 +2,9 @@
   "name": "oauth2",
   "version": "1.0.0",
   "description": "Oauth2 library for resource owner password credentials",
-  "main": "src/Oauth2.js",
+  "main": "dist/Oauth2.js",
   "scripts": {
+    "prepublish": "gulp",
     "test": "gulp test"
   },
   "keywords": [
