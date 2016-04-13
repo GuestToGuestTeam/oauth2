@@ -105,7 +105,7 @@ describe('Oauth2', () => {
 
         it('should submit POST request', (done) => {
             server.respondWith('POST', '/post', [
-                200, { "Content-Type": "application/json" }, JSON.stringify({ foo: "bar" })
+                201, { "Content-Type": "application/json" }, JSON.stringify({ foo: "bar" })
             ]);
 
             Oauth2.fetch('/post', {
@@ -118,6 +118,7 @@ describe('Oauth2', () => {
                 }
             })
             .then((request) => {
+                assert.equal(201, request.status);
                 assert.isObject(request.responseJSON);
                 assert.propertyVal(request.responseJSON, 'foo', 'bar');
                 done();

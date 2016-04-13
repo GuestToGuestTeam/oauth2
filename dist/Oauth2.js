@@ -145,7 +145,7 @@ var Oauth2 = function () {
                         if (request.responseHeaders && request.responseHeaders['Content-Type'] && request.responseHeaders['Content-Type'] === 'application/json') {
                             request.responseJSON = JSON.parse(request.responseText);
                         }
-                        if (request.status == 200) {
+                        if (request.status >= 200 && request.status < 300) {
                             resolve(request);
                         } else {
                             reject(request);
