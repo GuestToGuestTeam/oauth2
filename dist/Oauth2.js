@@ -59,7 +59,7 @@ var Oauth2 = function () {
                             reject(request);
                         });
                     } else {
-                        reject(error);
+                        reject(request);
                     }
                 });
             });

@@ -61,7 +61,7 @@ export default class Oauth2 {
                             }
                         );
                     } else {
-                        reject(error);
+                        reject(request);
                     }
                 }
             );

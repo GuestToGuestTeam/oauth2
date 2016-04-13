@@ -126,6 +126,25 @@ describe('Oauth2', () => {
             server.respond();
         });
 
+        it('should fail with 500 error status', (done) => {
+            server.respondWith('GET', '/error', [500, {}, 'Internal Server Error']);
+            Oauth2.fetch('/error')
+                .then(
+                    (request) => {
+                        done(new Error('Should not be reached'));
+                    },
+                    (request) => {
+                        try {
+                            assert.equal(500, request.status);
+                            done();
+                        } catch (e) {
+                            done(e);
+                        }
+                    }
+                );
+            server.respond();
+        });
+
     });
 
     describe('executeQuery()', () => {
@@ -167,6 +186,26 @@ describe('Oauth2', () => {
             server.respond();
         });
 
+        it('should fail with 400 error status', (done) => {
+            server.respondWith('POST', /oauth\/v2\/token/, [400, {}, 'Bad Request']);
+
+            Oauth2.auth().then(
+                (request) => {
+                    done(new Error('Should not be reached'));
+                },
+                (request) => {
+                    try {
+                        assert.equal(400, request.status);
+                        done();
+                    } catch (e) {
+                        done(e);
+                    }
+                }
+            );
+
+            server.respond();
+        });
+
     });
 
     describe('refreshToken()', () => {
@@ -189,6 +228,26 @@ describe('Oauth2', () => {
                     done(e);
                 }
             });
+
+            server.respond();
+        });
+
+        it('should fail with 400 error status', (done) => {
+            server.respondWith('POST', /oauth\/v2\/token/, [400, {}, 'Bad Request']);
+
+            Oauth2.refreshToken().then(
+                (request) => {
+                    done(new Error('Should not be reached'));
+                },
+                (request) => {
+                    try {
+                        assert.equal(400, request.status);
+                        done();
+                    } catch (e) {
+                        done(e);
+                    }
+                }
+            );
 
             server.respond();
         });
@@ -262,6 +321,52 @@ describe('Oauth2', () => {
                     done(e);
                 }
             });
+
+            server.respond();
+        });
+
+        it('should fail with 401 error status', (done) => {
+            server.respondWith('GET', '/fetch', [401, {}, 'Unauthorized']);
+
+            Oauth2.setAccessToken('this_is_an_access_token');
+            Oauth2.setRefreshToken('this_is_a_refresh_token');
+
+            Oauth2.request('/fetch').then(
+                (request) => {
+                    done(new Error('Should not be reached'));
+                },
+                (request) => {
+                    try {
+                        assert.equal(401, request.status);
+                        done();
+                    } catch (e) {
+                        done(e);
+                    }
+                }
+            );
+
+            server.respond();
+        });
+
+        it('should fail with 409 error status', (done) => {
+            server.respondWith('GET', '/fetch', [409, {}, 'Conflict']);
+
+            Oauth2.setAccessToken('this_is_an_access_token');
+            Oauth2.setRefreshToken('this_is_a_refresh_token');
+
+            Oauth2.request('/fetch').then(
+                (request) => {
+                    done(new Error('Should not be reached'));
+                },
+                (request) => {
+                    try {
+                        assert.equal(409, request.status);
+                        done();
+                    } catch (e) {
+                        done(e);
+                    }
+                }
+            );
 
             server.respond();
         });
