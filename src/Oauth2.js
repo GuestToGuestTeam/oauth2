@@ -46,7 +46,7 @@ export default class Oauth2 {
                 function (request) {
                     if (request.status == 401) {
                         Oauth2.refreshToken().then(
-                            function (request) {
+                            function () {
                                 // re-execute query
                                 Oauth2.executeQuery(url, options).then(
                                     function (request) {
@@ -61,6 +61,13 @@ export default class Oauth2 {
                                 reject(request);
                             }
                         );
+                    } else if (request.status == 400) {
+                        // re-execute query
+                        Oauth2.executeQuery(url, options).then(function (request) {
+                            resolve(request);
+                        }, function (request) {
+                            reject(request);
+                        });
                     } else {
                         reject(request);
                     }
